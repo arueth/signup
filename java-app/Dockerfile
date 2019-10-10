@@ -29,6 +29,6 @@ ADD tomcat/mysql-connector-java-5.1.36-bin.jar $CATALINA_HOME/lib/
 WORKDIR $CATALINA_HOME/webapps/
 COPY --from=devenv /usr/src/java-app/target/java-web.war .
 
-# start tomcat7 with remote debugging
+# start tomcat7 
 EXPOSE 8080
 CMD ["run.sh"]

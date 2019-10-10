@@ -1,17 +1,38 @@
 # escape=`
-FROM microsoft/dotnet:2.2.104-sdk-alpine3.8 as builder
+FROM microsoft/dotnet-framework:4.7.2-sdk AS builder
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-WORKDIR /src
-COPY SignupApiCore/SignupApiCore.csproj .
-RUN dotnet restore
+WORKDIR C:\src
+COPY .\SignupApi.sln C:\src\
+COPY .\SignupApi\SignupApi.csproj .\SignupApi\
+COPY .\SignupApi\packages.config .\SignupApi\
+RUN nuget restore SignupApi.sln
 
-COPY SignupApiCore/ .
-RUN dotnet publish
+COPY . C:\src
+RUN msbuild SignupApi.sln /p:OutputPath=c:\out /p:Configuration=Release
 
 # app image
-FROM microsoft/dotnet:2.2.2-aspnetcore-runtime-alpine3.8
+FROM microsoft/aspnet:4.7.2-windowsservercore-ltsc2016
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 
-CMD ["dotnet", "SignupApiCore.dll"]
+ENV APP_ROOT="C:\web-app" `
+    DB_CONNECTION_STRING_PATH=""
 
-WORKDIR /dotnetapp
-COPY --from=builder /src/bin/Debug/netcoreapp2.2/publish .
+WORKDIR $APP_ROOT
+RUN Import-Module WebAdministration; `
+    Set-ItemProperty 'IIS:\AppPools\DefaultAppPool' -Name processModel.identityType -Value LocalSystem; `
+    Remove-Website -Name 'Default Web Site'; `
+    New-Website -Name 'web-app' -Port 80 -PhysicalPath $env:APP_ROOT
+
+COPY start.ps1 .
+ENTRYPOINT ["powershell", ".\\start.ps1"]
+
+HEALTHCHECK --interval=5s `
+ CMD powershell -command `
+    try { `
+     $response = iwr http://localhost/api/diagnostics -UseBasicParsing; `
+     if ($response.StatusCode -eq 200) { return 0} `
+     else {return 1}; `
+    } catch { return 1 }
+
+COPY --from=builder C:\out\_PublishedWebsites\SignupApi .

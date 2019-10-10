@@ -100,4 +100,17 @@ public class User {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}	
+
+	@Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+				", password='" + password + '\'' +
+				", emailAddress='" + emailAddress + '\'' +
+				", dateOfBirth='" + dateOfBirth + '\'' +
+                '}';
+    }
 }

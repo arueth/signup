@@ -1,8 +1,10 @@
 # Signup Application
 
-The Signup application is a basic Java CRUD (Create, Read, Update, Delete) application that uses Spring and Hibernate to transact queries against MySQL. 
+The Signup application is a basic Java CRUD (Create, Read, Update, Delete) application that uses Spring REST framework to transact queries against MySQL via a REST application written in dotNet.
 
-<img src="images/architecture.jpg"  width=480>
+In the previous version, the application transacted directly to the MySQL database via Hibernate. In this version, the Service implementation and Controller were re-written to make calls to the REST interface of the dotnet-api application.
+
+<img src="images/architecture-v2.jpg"  width=480>
 
 ##  Building the Application
 
@@ -50,15 +52,18 @@ CMD ["run.sh"]
 
 To build the application:
 ```
-docker image build -t java-app .
+docker image build -t java-app:2 .
 ```
 
 ## Running the Application
 
-To deploy both the application and the database, we use a Docker Compose file. MySQL requires a root password and this set using Docker Secrets. In this case the password is set from a file. Docker Secrets is available in Swarm mode, to enable Swarm type:
+To deploy both the application and the database, we user a Docker Compose file. MySQL requires a root password and this set using Docker Secrets. In this case the password is set from a file. Docker Secrets is available in Swarm mode, to enable Swarm type:
 ```
 docker swarm init
 ```
+
+The java-web application sends requests to the dotnet-api, the URL of the dotnet-api is set in the Compose file by an environmental variable.
+
 
 To start the application user Docker Compose:
 ```
@@ -66,3 +71,8 @@ docker-compose up -d
 ```
 
 To try out the application go to [http://localhost:8080/java-web](http://localhost:8080/java-web).
+=======
+
+To connect to dotnet-api set environmental variable, e.g.
+
+BASEURI: http://dotnet-api/api/users
