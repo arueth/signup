@@ -6,7 +6,7 @@ ARG base_image=tomcat:7-jre8
 ###############################################################################
 FROM ${build_image} AS devenv
 
-WORKDIR /usr/src/workshop-signup
+WORKDIR /usr/src/java-app
 
 COPY app/pom.xml .
 
@@ -25,7 +25,7 @@ RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package -DskipTests
 ###############################################################################
 FROM ${base_image}
 
-COPY --from=devenv /usr/src/workshop-signup/target/workshop-signup.war /usr/local/tomcat/webapps/
+COPY --from=devenv /usr/src/java-app/target/java-web.war /usr/local/tomcat/webapps/
 
 COPY tomcat /usr/local/tomcat/
 

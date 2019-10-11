@@ -26,7 +26,7 @@ Response:
         "lastName": "One",
         "password": "abc",
         "emailAddress": "u1@abc.com",
-        "dateOfBirth": "1981-12-31T00:00:00"
+        "workshopDate": "1981-12-31T00:00:00"
     },
     {
         "id": 2,
@@ -35,7 +35,7 @@ Response:
         "lastName": "Two",
         "password": "abc",
         "emailAddress": "u2@abc.com",
-        "dateOfBirth": "1982-12-31T00:00:00"
+        "workshopDate": "1982-12-31T00:00:00"
     }
 ]
 ```
@@ -59,7 +59,7 @@ Response:
     "lastName": "One",
     "password": "abc",
     "emailAddress": "u1@abc.com",
-    "dateOfBirth": "1981-12-31T00:00:00"
+    "workshopDate": "1981-12-31T00:00:00"
 }
 ```
 
@@ -84,7 +84,7 @@ Response:
     "lastName": "One",
     "password": "abc",
     "emailAddress": "u1@abc.com",
-    "dateOfBirth": "1981-12-31T00:00:00"
+    "workshopDate": "1981-12-31T00:00:00"
 }
 ```
 
@@ -103,7 +103,7 @@ curl http://localhost:57989/api/users \
   "lastName" : "One",
   "password" : "abc",
   "emailAddress" : "u1@abc.com",
-  "dateOfBirth" : "1981-12-31"
+  "workshopDate" : "1981-12-31"
 }'
 ```
 
@@ -117,7 +117,7 @@ Response:
     "lastName": "One",
     "password": "abc",
     "emailAddress": "u1@abc.com",
-    "dateOfBirth": "1981-12-31T00:00:00"
+    "workshopDate": "1981-12-31T00:00:00"
 }
 ```
 

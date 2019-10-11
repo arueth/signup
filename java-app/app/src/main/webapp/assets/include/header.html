@@ -1,37 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
-        <title>User Login</title>
-
-        <link rel="shortcut icon" href="assets/images/docker-logo.png" type="image/png" />
-
-        <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
-        <link href="assets/css/style.css" rel="stylesheet" />
-
-        <style>
-            .error {
-                color: #ff0000;
-                font-size: 0.9em;
-                font-weight: bold;
-            }
-
-            .errorblock {
-                color: #000;
-                background-color: #ffeeee;
-                border: 3px solid #ff0000;
-                padding: 8px;
-                margin: 16px;
-            }
-        </style>
-    </head>
-    <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-                <a class="navbar-brand" href="/workshop-signup">
+                <a class="navbar-brand" href="/">
                     <svg id="logoHorizontal" viewBox="-5.724 -43.601 2000 600">
                         <path
                             d="M934.957,149.221c-10.479-0.345-19.253,7.869-19.599,18.348c-0.014,0.417-0.014,0.834,0,1.251v94.24
@@ -172,31 +141,3 @@
                 </div>
             </nav>
         </header>
-    
-        <div class="container-fluid">
-            <div class="card mx-auto" style="width: 400px;">
-                <h5 class="card-header">Login</h5>
-                <div class="card-body">
-                    <form:form id="myForm" method="post" class="bs-example form-horizontal" commandName="userLogin">
-                        <div class="form-group">
-                            <label for="userNameInput">Username</label>
-                            <form:input type="text" class="form-control" path="userName" id="userNameInput" placeholder="Username" />
-                            <form:errors path="userName" cssClass="error" />
-                        </div>
-                        <div class="form-group">
-                            <label for="passwordInput">Password</label>
-                            <form:input type="password" class="form-control" path="password" id="passwordInput" placeholder="Password" />
-                            <form:errors path="password" cssClass="error" />
-                        </div>
-                        <button class="btn btn-primary">Login</button>
-                        <button class="btn btn-secondary">Cancel</button>
-                    </form:form>
-                </div>
-            </div>
-        </div>
-
-    </body>
-
-    <script src="assets/js/jquery-3.4.1.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.js"></script>
-</html>

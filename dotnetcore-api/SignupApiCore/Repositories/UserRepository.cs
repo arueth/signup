@@ -44,12 +44,12 @@ namespace SignupApiCore.Repositories
 
         public User AddUser(User user)
         {
-            var sqlCommand = "INSERT INTO user (dateOfBirth, emailAddress, firstName, lastName, password, userName)";
-            sqlCommand += "VALUES(?dateOfBirth, ?emailAddress, ?firstName, ?lastName, ?password, ?userName)";
+            var sqlCommand = "INSERT INTO user (workshopDate, emailAddress, firstName, lastName, password, userName)";
+            sqlCommand += "VALUES(?workshopDate, ?emailAddress, ?firstName, ?lastName, ?password, ?userName)";
 
             var parameters = new List<(string, object)>
             {
-                ("dateOfBirth", user.DateOfBirth),
+                ("workshopDate", user.WorkshopDate),
                 ("emailAddress", user.EmailAddress),
                 ("firstName", user.FirstName),
                 ("lastName", user.LastName),
@@ -110,7 +110,7 @@ namespace SignupApiCore.Repositories
                 FirstName = reader.GetString("firstName"),
                 LastName = reader.GetString("lastName"),
                 EmailAddress = reader.GetString("emailAddress"),
-                DateOfBirth = reader.GetDateTime("dateOfBirth")
+                WorkshopDate = reader.GetDateTime("workshopDate")
             };
         }
     }

@@ -16,6 +16,6 @@ namespace SignupApiCore.Models
 
         public string EmailAddress { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime WorkshopDate { get; set; }
     }
 }

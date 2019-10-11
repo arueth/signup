@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -15,36 +15,36 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@NotEmpty
-	@Size(min=4, max=20)
-	private String userName;
-	
+
 	@NotEmpty
 	private String firstName;
-	
+
 	@NotEmpty
 	private String lastName;
-	
-	@NotEmpty
-	@Size(min=4, max=8)
-	private String password;
-	
+
 	@NotEmpty
 	@Email
 	private String emailAddress;
-	
+
 	@NotNull
-	@Past
-	@DateTimeFormat(pattern="MM/dd/yyyy")
-	private Date dateOfBirth;
-	
+	@Future
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	private Date workshopDate;
+
+	@NotEmpty
+	@Size(min = 4, max = 32)
+	private String userName;
+
+	@NotEmpty
+	@Size(min = 4, max = 32)
+	private String password;
+
 	public Long getId() {
 		return id;
 	}
@@ -93,24 +93,18 @@ public class User {
 		this.emailAddress = emailAddress;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
+	public Date getWorkshopDate() {
+		return workshopDate;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}	
+	public void setWorkshopDate(Date workshopDate) {
+		this.workshopDate = workshopDate;
+	}
 
 	@Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-				", password='" + password + '\'' +
-				", emailAddress='" + emailAddress + '\'' +
-				", dateOfBirth='" + dateOfBirth + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "User{" + "id=" + id + ", userName='" + userName + '\'' + ", firstName='" + firstName + '\''
+				+ ", lastName='" + lastName + '\'' + ", password='" + password + '\'' + ", emailAddress='"
+				+ emailAddress + '\'' + ", workshopDate='" + workshopDate + '\'' + '}';
+	}
 }
